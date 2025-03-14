@@ -1,24 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Road : MonoBehaviour
 {
-    RoadManager roadManager;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] public UnityEvent callBack;
+
+    public void Activate()
     {
-        roadManager = GetComponentInParent<RoadManager>();
+        if (callBack != null) callBack.Invoke();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("obj"))
-        {
 
-            roadManager.count = (roadManager.count % 4) +1;
-            Vector3 vec = new Vector3(0, 0, roadManager.lastPos.position.z + 40f * roadManager.count);
-            transform.position = vec;
-        }
-    }
+    //¤±¤±
+    //RoadManager roadManager;
+    //void Awake()
+    //{
+    //    roadManager = GetComponentInParent<RoadManager>();
+    //}
+
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("obj"))
+    //    {
+
+    //        roadManager.count = (roadManager.count % 4) + 1;
+    //        Vector3 vec = new Vector3(0, 0, roadManager.lastPos.position.z + 40f * roadManager.count);
+    //        transform.position = vec;
+    //    }
+    //}
 }

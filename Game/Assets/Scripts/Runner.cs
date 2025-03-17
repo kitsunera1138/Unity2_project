@@ -67,11 +67,23 @@ public class Runner : MonoBehaviour
     //    Vector2 inputvalue = value.Get<Vector2>();
     //    Debug.Log(inputvalue);
     //}
-
+    bool isAttack = false;
     void OnSpace()
     {
         Debug.Log("Space");
-        animator.SetTrigger("Attack");
+
+        StartCoroutine(Attack(isAttack));
+    }
+
+    IEnumerator Attack(bool isAttack)
+    {
+        if(isAttack == false)
+        {
+            isAttack = true;
+            animator.SetTrigger("Attack");
+            yield return new WaitForSeconds(3f);
+            isAttack = false;
+        }
 
     }
 }

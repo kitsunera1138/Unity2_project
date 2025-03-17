@@ -15,10 +15,11 @@ enum RoadLine
 public class Runner : MonoBehaviour
 {
     [SerializeField] RoadLine roadLine = RoadLine.MIDDLE;
+
     [SerializeField] int positionX = 4;
     [SerializeField] Rigidbody rigidbody;
+    [SerializeField] Animator animator;
 
-    Animator animator;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -46,6 +47,7 @@ public class Runner : MonoBehaviour
         {
             if (roadLine != RoadLine.LEFT)
             {
+                animator.Play("Left Avoid");
                 roadLine--;
                 //FixedUpdate·Î º¯°æ
                 //rigidbody.transform.Translate(-positionX, 0, 0);
@@ -56,6 +58,7 @@ public class Runner : MonoBehaviour
         {
             if (roadLine != RoadLine.RIGHT)
             {
+                animator.Play("Right Avoid");
                 roadLine++;
                 //rigidbody.transform.Translate(positionX, 0, 0);
             }
@@ -72,10 +75,10 @@ public class Runner : MonoBehaviour
     {
         Debug.Log("Space");
 
-        StartCoroutine(Attack(isAttack));
+        StartCoroutine(Attack());
     }
 
-    IEnumerator Attack(bool isAttack)
+    IEnumerator Attack()
     {
         if(isAttack == false)
         {

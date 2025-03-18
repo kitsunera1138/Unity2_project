@@ -8,8 +8,12 @@ public class MenuManager : MonoBehaviour
     public void Execute()
     {
         Debug.Log("start");
-        SceneManager.LoadScene("Game");
+        //SceneManager.LoadScene("Game");
+
+        //1씬으로 이동 + 비동기 이동 함수
+        StartCoroutine(SceneryManager.Instance.AsyncLoad(1));
     }
+
     public void Exit()
     {
         Debug.Log("Quit");

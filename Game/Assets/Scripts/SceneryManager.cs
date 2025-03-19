@@ -18,7 +18,7 @@ public class SceneryManager : Singleton<SceneryManager>
     public IEnumerator FadeIn()
     {
         screenImage.gameObject.SetActive(true);
-
+        Debug.Log("FadeIn" + screenImage);
         Color color = screenImage.color;
         color.a = 1f;
 
@@ -30,24 +30,26 @@ public class SceneryManager : Singleton<SceneryManager>
         }
 
         screenImage.gameObject.SetActive(false);
+        Debug.Log("FadeIn" + screenImage);
+
     }
 
-    public IEnumerator FadeOut()
-    {
-        //screenImage.gameObject.SetActive(true);
+    //public IEnumerator FadeOut()
+    //{
+    //    //screenImage.gameObject.SetActive(true);
 
-        Color color = screenImage.color;
-        color.a = 0;
+    //    Color color = screenImage.color;
+    //    color.a = 0;
 
-        while (color.a < 1)
-        {
-            color.a += Time.deltaTime;
-            screenImage.color = color;
-            yield return new WaitForSeconds(0.005f);
-        }
+    //    while (color.a < 1)
+    //    {
+    //        color.a += Time.deltaTime;
+    //        screenImage.color = color;
+    //        yield return new WaitForSeconds(0.005f);
+    //    }
 
-        screenImage.gameObject.SetActive(false);
-    }
+    //    screenImage.gameObject.SetActive(false);
+    //}
 
     //비동기 씬이동
     public IEnumerator AsyncLoad(int index)

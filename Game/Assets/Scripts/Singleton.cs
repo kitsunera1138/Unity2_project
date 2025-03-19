@@ -23,6 +23,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             //찾지 못했으면 게임 오브젝트 생성
             if (instance == null)
             {
+                Debug.Log(typeof(T).Name + "Singleton add");
                 GameObject obj = new GameObject(typeof(T).Name);
                 instance = obj.AddComponent<T>();
             }

@@ -7,7 +7,7 @@ public class MenuManager : MonoBehaviour
 {
     public void Execute()
     {
-        Debug.Log("start");
+        GameManager.Instance.Execute();
         //SceneManager.LoadScene("Game");
 
         //1씬으로 이동 + 비동기 이동 함수

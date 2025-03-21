@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class AudioManager : Singleton<AudioManager>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] AudioSource audioSource;
 
-    // Update is called once per frame
-    void Update()
+    protected override void Awake()
     {
-        
+        base.Awake();
+        audioSource = GetComponent<AudioSource>();
+    }
+    public void Listener(AudioClip audioClip)
+    {
+        audioSource.PlayOneShot(audioClip);
     }
 }

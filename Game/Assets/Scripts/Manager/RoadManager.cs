@@ -19,8 +19,10 @@ public class RoadManager : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.Instance.State) { return; }
+
         //Vector3 vec = new Vector3(0,0,-1);
-        for(int i = 0; i < roads.Count; i++)
+        for (int i = 0; i < roads.Count; i++)
         {
             //roads[i].transform.position += vec * Time.deltaTime * roadSpeed;
             roads[i].transform.Translate(Vector3.back* roadSpeed * Time.deltaTime);

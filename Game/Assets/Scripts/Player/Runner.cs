@@ -38,10 +38,11 @@ public class Runner : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.Instance.State == false) { return; }
         Move();
     }
 
-    
+
     void Move()
     {
         //rigidbody.position = new Vector3((int)roadLine * positionX, 0, 0);
@@ -91,7 +92,7 @@ public class Runner : MonoBehaviour
 
     IEnumerator Attack()
     {
-        if(isAttack == false)
+        if (isAttack == false)
         {
             isAttack = true;
             animator.SetTrigger("Attack");

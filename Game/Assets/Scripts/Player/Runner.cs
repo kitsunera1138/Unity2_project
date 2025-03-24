@@ -54,6 +54,8 @@ public class Runner : MonoBehaviour
 
     void OnKeyUpdate()
     {
+        if (GameManager.Instance.State == false) { return; }
+
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             if (roadLine != RoadLine.LEFT)
@@ -85,9 +87,12 @@ public class Runner : MonoBehaviour
     bool isAttack = false;
     void OnSpace()
     {
+        if (GameManager.Instance.State == false) { return; }
+
         Debug.Log("Space");
 
         StartCoroutine(Attack());
+
     }
 
     IEnumerator Attack()
@@ -106,5 +111,24 @@ public class Runner : MonoBehaviour
     private void OnDisable()
     {
         InputManager.Instance.action -= OnKeyUpdate;
+    }
+    void Die()
+    {
+        animator.Play("Die");
+        GameManager.Instance.Finish();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        //if (other.gameObject.GetComponent<Obstacle>() != null && GameManager.Instance.State)
+        //{
+        //    Die();
+        //}
+
+        Obstacle obstacle = other.GetComponent<Obstacle>();
+
+        if(obstacle != null)
+        {
+            Die();
+        }
     }
 }

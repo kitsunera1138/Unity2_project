@@ -21,10 +21,14 @@ public class ObstacleManager : MonoBehaviour
     {
         for (int i = 0; i < createCount; i++)
         {
-            GameObject prefab = Instantiate(Resources.Load<GameObject>(obstaclesNames[Random.Range(0, obstaclesNames.Count)]), gameObject.transform);
+            //GameObject prefab = Instantiate(Resources.Load<GameObject>(obstaclesNames[Random.Range(0, obstaclesNames.Count)]), gameObject.transform);
 
-            prefab.SetActive(false);
-            obstacles.Add(prefab);
+            //Resources Manager의 Instantiate로 대체
+            GameObject clone = ResourcesManager.Instance.Instantiate(obstaclesNames[Random.Range(0, obstaclesNames.Count)], gameObject.transform);
+
+
+            clone.SetActive(false);
+            obstacles.Add(clone);
         }
     }
 
@@ -119,7 +123,10 @@ public class ObstacleManager : MonoBehaviour
                 {
                     //모든 게임 오브젝트가 활성화 되어 있다면 게임 오브젝트를 새로 생성한 다음 obstacles 리스트에 넣어줍니다.
 
-                    GameObject clone = Instantiate(Resources.Load<GameObject>(obstaclesNames[Random.Range(0, obstaclesNames.Count)]), gameObject.transform);
+                    //GameObject clone = Instantiate(Resources.Load<GameObject>(obstaclesNames[Random.Range(0, obstaclesNames.Count)]), gameObject.transform);
+
+                    //Resources Manager의 Instantiate로 대체
+                    GameObject clone = ResourcesManager.Instance.Instantiate(obstaclesNames[Random.Range(0, obstaclesNames.Count)], gameObject.transform);
 
                     clone.SetActive(false);
                     obstacles.Add(clone);

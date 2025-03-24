@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    private bool state;
+    [SerializeField] private bool state;
     public bool State { get { return state; } }
     [SerializeField] bool on;
-    public void Execute()
+
+    public void Execute() //게임씬에서는 호출안되어서 Timer 안됨
     {
         state = true;
     }
@@ -22,7 +23,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        if (on) { state = false; }
-        else { state = true; }
+        //if (on) { state = false; }
+        //else { state = true; }
     }
 }

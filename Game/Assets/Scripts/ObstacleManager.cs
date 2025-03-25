@@ -9,6 +9,8 @@ public class ObstacleManager : MonoBehaviour
 
     [SerializeField] int createCount = 5;
 
+    [SerializeField] Transform[] transforms;
+
     private void Awake()
     {
         obstacles.Capacity = 10;
@@ -43,6 +45,51 @@ public class ObstacleManager : MonoBehaviour
             }
         }
         return true;
+    }
+
+
+    [SerializeField] int random;
+    IEnumerator ActiveObstacle()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(2.5f);
+
+            //if (!GameManager.Instance.State) { continue; }
+
+            random = Random.Range(0, obstacles.Count);
+
+            //현재 게임 오브젝트가 활성화 되어 있는 지 확인합니다.
+            while (obstacles[random].activeSelf == true)
+            {
+                //현재 리스트에 있는 모든 게임 오브젝트가 활성화되어 있는 지 확인합니다.
+                if (ExamineActive())
+                {
+                    //모든 게임 오브젝트가 활성화 되어 있다면 게임 오브젝트를 새로 생성한 다음 obstacles 리스트에 넣어줍니다.
+
+                    //GameObject clone = Instantiate(Resources.Load<GameObject>(obstaclesNames[Random.Range(0, obstaclesNames.Count)]), gameObject.transform);
+
+                    //Resources Manager의 Instantiate로 대체
+                    GameObject clone = ResourcesManager.Instance.Instantiate(obstaclesNames[Random.Range(0, obstaclesNames.Count)], gameObject.transform);
+                    
+                    clone.SetActive(false);
+                    obstacles.Add(clone);
+                }
+
+                //현재 인덱스에 있는 게임 오브젝트가 활성화 되어 있으면 random 변수의 값을 +1 해서 다시 검색합니다.
+                random = (random + 1) % obstacles.Count;
+            }
+            obstacles[random].transform.localPosition = transforms[Random.Range(0, transforms.Length)].position;
+
+            obstacles[random].SetActive(true);
+
+            //먼저 오브젝트 활성화 해야 위치값 바뀐다 ;; 이때는 장애물에 켜지면 위치값 정해줘서 서순이 크고 위치 바뀌어야 되었음
+            //Vector3 vec = obstacles[random].transform.position;
+            //vec.z = 120f;
+            //obstacles[random].transform.localPosition = vec;
+
+
+        }
     }
 
     //ㅁㅁ
@@ -104,41 +151,6 @@ public class ObstacleManager : MonoBehaviour
     //    obstacles.Add(prefab);
     //}
 
-    [SerializeField] int random;
-    IEnumerator ActiveObstacle()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(2.5f);
-
-            //if (!GameManager.Instance.State) { continue; }
-
-            random = Random.Range(0, obstacles.Count);
-
-            //현재 게임 오브젝트가 활성화 되어 있는 지 확인합니다.
-            while (obstacles[random].activeSelf == true)
-            {
-                //현재 리스트에 있는 모든 게임 오브젝트가 활성화되어 있는 지 확인합니다.
-                if (ExamineActive())
-                {
-                    //모든 게임 오브젝트가 활성화 되어 있다면 게임 오브젝트를 새로 생성한 다음 obstacles 리스트에 넣어줍니다.
-
-                    //GameObject clone = Instantiate(Resources.Load<GameObject>(obstaclesNames[Random.Range(0, obstaclesNames.Count)]), gameObject.transform);
-
-                    //Resources Manager의 Instantiate로 대체
-                    GameObject clone = ResourcesManager.Instance.Instantiate(obstaclesNames[Random.Range(0, obstaclesNames.Count)], gameObject.transform);
-
-                    clone.SetActive(false);
-                    obstacles.Add(clone);
-                }
-
-                //현재 인덱스에 있는 게임 오브젝트가 활성화 되어 있으면 random 변수의 값을 +1 해서 다시 검색합니다.
-                random = (random + 1) % obstacles.Count;
-            }
-
-            obstacles[random].SetActive(true);
-        }
-    }
 
     //ㅁㅁ
     //GameObject obstacle;

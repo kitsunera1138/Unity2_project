@@ -7,8 +7,8 @@ public class InteractZone : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Road road = other.GetComponent<Road>();
+        IHitable hitable = other.GetComponent<IHitable>();
 
-        if (road != null) road.Activate();
+        if (hitable != null) hitable.Activate();
     }
 }

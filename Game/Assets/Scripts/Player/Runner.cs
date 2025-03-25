@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.EventSystems.EventTrigger;
 
 enum RoadLine
 {
@@ -49,7 +50,8 @@ public class Runner : MonoBehaviour
 
 
         //선형 보간 방식으로 변경 -> 도착하기 전에 움직이면 위치 오차 생김
-        rigidbody.position = Vector3.Lerp(rigidbody.position, new Vector3((int)roadLine * positionX, 0, 0), Time.deltaTime * speed);
+        //rigidbody.position = Vector3.Lerp(rigidbody.position, new Vector3((int)roadLine * positionX, 0, 0), Time.deltaTime * speed);
+        rigidbody.position = Vector3.Lerp(rigidbody.position, new Vector3((int)roadLine * positionX, 0, 0), Time.deltaTime * SpeedManager.Instance.Speed);
     }
 
     void OnKeyUpdate()
@@ -99,7 +101,10 @@ public class Runner : MonoBehaviour
     {
         if (isAttack == false)
         {
+            Debug.Log("Attack");
             isAttack = true;
+            //animator.SetInteger("Attack Layer", 1);
+
             animator.SetTrigger("Attack");
             yield return new WaitForSeconds(3f);
             isAttack = false;

@@ -25,7 +25,8 @@ public class RoadManager : MonoBehaviour
         for (int i = 0; i < roads.Count; i++)
         {
             //roads[i].transform.position += vec * Time.deltaTime * roadSpeed;
-            roads[i].transform.Translate(Vector3.back* roadSpeed * Time.deltaTime);
+            //roads[i].transform.Translate(Vector3.back* roadSpeed * Time.deltaTime);
+            roads[i].transform.Translate(Vector3.back* SpeedManager.Instance.Speed * Time.deltaTime);
         }
 
         //lastPos = roads[roads.Count - 1].transform;

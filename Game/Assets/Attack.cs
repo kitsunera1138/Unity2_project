@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    public GameObject target;
+    private void Update()
+    {
+        transform.position = target.transform.position;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<Obstacle>() != null)
         {
-            Debug.Log("Attack");
+            other.gameObject.SetActive(false);
         }
     }
 }

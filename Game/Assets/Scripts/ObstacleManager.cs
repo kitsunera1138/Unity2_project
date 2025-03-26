@@ -53,7 +53,7 @@ public class ObstacleManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(2.5f);
+            yield return CoroutineCache.WaitforSecond(TimeManager.Instance.ActiveTime);
 
             //if (!GameManager.Instance.State) { continue; }
 

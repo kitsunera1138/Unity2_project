@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class InteractZone : MonoBehaviour
 {
+    //°³¹æ Æó¼â ¿øÄ¢ - SOLID ¿øÄ¢
     private void OnTriggerEnter(Collider other)
     {
         IHitable hitable = other.GetComponent<IHitable>();

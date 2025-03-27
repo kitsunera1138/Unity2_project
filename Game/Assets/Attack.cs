@@ -13,6 +13,7 @@ public class Attack : MonoBehaviour
     {
         if(other.GetComponent<Obstacle>() != null)
         {
+            Debug.Log("Obstacle Kill");
             other.gameObject.SetActive(false);
         }
     }

@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.EventSystems.EventTrigger;
+using Cinemachine;
 
 enum RoadLine
 {
@@ -21,6 +22,7 @@ public class Runner : MonoBehaviour
     [SerializeField] Rigidbody rigidbody;
     [SerializeField] Animator animator;
 
+    [SerializeField] CinemachineVirtualCamera cinemachineVirtualCamera;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -121,6 +123,8 @@ public class Runner : MonoBehaviour
     {
         animator.Play("Die");
         GameManager.Instance.Finish();
+
+        cinemachineVirtualCamera.LookAt = gameObject.transform;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -135,5 +139,10 @@ public class Runner : MonoBehaviour
         {
             Die();
         }
+    }
+
+    public void Synchronize()
+    {
+        animator.speed = SpeedManager.Instance.Speed / SpeedManager.Instance.InitializeSpeed;
     }
 }

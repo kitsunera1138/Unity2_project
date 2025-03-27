@@ -8,7 +8,23 @@ public class TimeManager : Singleton<TimeManager>
 {
     [SerializeField] float activeTime = 2.5f;
     [SerializeField] float limitTime = 2.5f;
+
+    [SerializeField] float bestTime;
     public float ActiveTime {  get { return activeTime; } }
+
+    public void SetTime(float time)
+    {
+        bestTime = PlayerPrefs.GetFloat("Time"); //값 반환
+
+        Debug.Log("Current Time: " + time);
+        Debug.Log("Best Time: " + bestTime);
+
+        if (time > bestTime)
+        {
+            //갱신
+            PlayerPrefs.SetFloat("Time", time);
+        }
+    }
 
     private void OnEnable()
     {

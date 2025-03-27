@@ -9,8 +9,10 @@ public class InputManager : Singleton<InputManager>
 
     private void Update()
     {
+        if (GameManager.Instance.State == false) { return; }
+
         //키 입력이 들어왔는가
-        if(Input.anyKey == false){ return; }
+        if (Input.anyKey == false){ return; }
         if(action != null) { action?.Invoke(); }
     }
 }
